@@ -3,14 +3,9 @@ BASE_IMG := $(DOCKERMIRROR)alpine:3.17
 HTTP_PROXY := ${http_proxy}
 HTTPS_PROXY := ${https_proxy}
 DOCKER_BASENAME ?=${USER}
-PROJECT_NAME := micorservice-example
-DOCKERMIRROR ?= docker-registry-remote.artifactory-espoo1.int.net.nokia.com/
+PROJECT_NAME := microservice-example
 
-deps_update:
-	GO111MODULE=on GOPRIVATE="*.nokia.com" go get -v -u
-	GO111MODULE=on GOPRIVATE="*.nokia.com" go mod vendor
-	GO111MODULE=on GOPRIVATE="*.nokia.com" go mod tidy
-.PHONY: deps_update
+ 
 
 
 run-docker:
@@ -23,4 +18,4 @@ run-docker:
 	-t $(DOCKER_BASENAME)/$(PROJECT_NAME) .  
 .PHONY: run-docker
 
-docker: deps_update run-docker 
+docker:  run-docker 
